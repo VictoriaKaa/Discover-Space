@@ -1,0 +1,468 @@
+* {
+  box-sizing: border-box;
+  color: var(--color-white);
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-dark-blue: #304571;
+  --color-yellow: #ebff00;
+  --color-pink: #ff70d9;
+}
+@mixin for-tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin for-phone {
+  @media (max-width: 360px) {
+    @content;
+  }
+}
+
+.button {
+  width: 191px;
+  height: 54px;
+  font-size: 22px;
+  color: var(--color-yellow);
+  background-color: transparent;
+  border-radius: 30px;
+  border-color: var(--color-yellow);
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  &--filled {
+    color: var(--color-dark-blue);
+    background-color: var(--color-yellow);
+  }
+  @include for-phone {
+    width: 161px;
+    height: 33px;
+    font-size: 16px;
+  }
+}
+.name-yellow {
+  color: var(--color-yellow);
+}
+.name-pink {
+  color: var(--color-pink);
+}
+.hamb-menu {
+  display: none;
+  cursor: pointer;
+  position: relative;
+  @include for-phone {
+    display: block;
+  }
+}
+.hamb-line {
+  background: var(--color-white);
+  display: block;
+  height: 2px;
+  width: 24px;
+  position: relative;
+  &::before,
+  &::after {
+    background: var(--color-white);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+    width: 100%;
+  }
+  &::before {
+    top: 8px;
+  }
+  &::after {
+    top: -8px;
+  }
+}
+.side-menu {
+  display: none;
+  &:checked ~ .hamb-menu .hamb-line {
+    background: transparent;
+  }
+  &:checked ~ .hamb-menu .hamb-line::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  &:checked ~ .hamb-menu .hamb-line::after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  &:checked ~ .mobile-menu {
+    display: block;
+  }
+}
+.mobile-menu {
+  display: none;
+  position: absolute;
+  left: 100px;
+  top: 50px;
+  width: 200px;
+  padding: 50px;
+  background-color: var(--color-black);
+  transition: left 0.5s;
+  & div {
+    padding: 10px 10px;
+    font-size: 18px;
+  }
+  & .header__menu--button {
+    margin: 5px 0px 0px 10px;
+  }
+}
+
+.App {
+  background: linear-gradient(#0d1e48, #304571);
+}
+
+.header {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 80px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  @include for-tablet {
+    padding: 0 30px;
+  }
+  @include for-phone {
+    padding: 0 20px;
+  }
+  &__logo {
+    width: 105px;
+    height: 37px;
+    background: url("../public/logo.svg");
+  }
+  &__menu {
+    width: 259px;
+    display: flex;
+    justify-content: space-between;
+
+    @include for-phone {
+      display: none;
+    }
+    &--item {
+      font-size: 18px;
+      color: var(--color-white);
+      text-decoration: none;
+      &:hover {
+        background: -webkit-linear-gradient(
+          -62deg,
+          var(--color-yellow),
+          var(--color-pink)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    &--button {
+      width: 24px;
+      height: 20px;
+      background: url("../public/shop.svg");
+      &:hover {
+        cursor: pointer;
+        background: url("../public/shop-hover.svg");
+      }
+    }
+  }
+}
+
+.banner {
+  height: 490px;
+  padding: 0px 80px 0px 90px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: url("../public/EARTH.svg") no-repeat 95%,
+    linear-gradient(transparent, rgb(15, 20, 32, 0.79)),
+    url("../public/space1.svg") center/cover;
+  @include for-tablet {
+    padding-left: 30px;
+    background: url("../public/EARTH.svg") no-repeat 130%,
+      linear-gradient(transparent, rgb(15, 20, 32, 0.79)),
+      url("../public/space1.svg") center/cover;
+  }
+  @include for-phone {
+    align-items: inherit;
+    padding: 250px 33px 0px;
+    background: url("../public/EARTH.svg") no-repeat 130%,
+      linear-gradient(transparent, rgb(15, 20, 32, 0.79)),
+      url("../public/space1.svg") center/cover;
+    background-position: 50% -100%;
+  }
+  &__content {
+    width: 693px;
+    @include for-tablet {
+      width: 411px;
+    }
+    @include for-phone {
+      width: 294px;
+      text-align: center;
+    }
+    &--name span {
+      font-size: 72px;
+      font-weight: 900;
+      @include for-tablet {
+        font-size: 48px;
+      }
+      @include for-phone {
+        font-size: 36px;
+      }
+    }
+    &--description {
+      margin: 22px 0px;
+      @include for-phone {
+        margin: 17px 0px;
+      }
+      span {
+        font-size: 32px;
+        font-weight: 900;
+        @include for-tablet {
+          font-size: 22px;
+        }
+        @include for-phone {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.offers {
+  margin: 58px 80px 0px;
+  display: flex;
+  justify-content: center;
+  @include for-tablet {
+    margin: 55px 30px 0px;
+  }
+  @include for-phone {
+    margin: 50px 20px 0px;
+  }
+  &__title {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 900;
+    @include for-tablet {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+    @include for-phone {
+      font-size: 18px;
+    }
+  }
+  &__content {
+    max-width: 1088px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: -40px;
+  }
+  &__card {
+    height: 350px;
+    display: flex;
+    align-items: flex-end;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 524px;
+    margin-bottom: 40px;
+    padding: 39px 30px 41px 34px;
+    @include for-tablet {
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+
+      &:first-child {
+        &--content--name {
+          width: 212px;
+        }
+      }
+    }
+    @include for-tablet {
+      width: 339px;
+    }
+    @include for-phone {
+      width: 320px;
+    }
+    &--content {
+      width: 460px;
+      @include for-tablet {
+        width: 339px;
+      }
+      @include for-phone {
+        width: 320px;
+      }
+      &--name {
+        width: 285px;
+        padding-bottom: 22px;
+        font-size: 46px;
+        font-weight: 900;
+        line-height: 100%;
+        @include for-tablet {
+          width: 248px;
+          font-size: 40px;
+        }
+        @include for-phone {
+          width: 246px;
+          font-size: 40px;
+        }
+      }
+      &--description {
+        padding-bottom: 22px;
+        font-size: 24px;
+        font-weight: 900;
+        @include for-tablet {
+          width: 280px;
+          font-size: 16px;
+        }
+        @include for-phone {
+          width: 265px;
+          font-size: 16px;
+        }
+      }
+      &--button {
+        @include for-tablet {
+          width: 161px;
+          height: 33px;
+          font-size: 16px;
+        }
+      }
+    }
+    &--long {
+      width: 1088px;
+      @include for-tablet {
+        width: 339px !important;
+      }
+      @include for-phone {
+        width: 320px !important;
+      }
+      .offers__card--content {
+        width: 635px;
+        &--name {
+          font-size: 74px;
+          width: 635px;
+          @include for-tablet {
+            width: 246px;
+            font-size: 40px;
+          }
+          @include for-phone {
+            width: 265px;
+            font-size: 40px;
+          }
+        }
+        &--description {
+          font-size: 26px;
+          @include for-tablet {
+            font-size: 16px;
+          }
+          @include for-phone {
+            width: 265px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  margin: 62px 80px 60px;
+  &__inner {
+    max-width: 1088px;
+  }
+  @include for-tablet {
+    margin: 55px 30px 53px;
+  }
+  @include for-phone {
+    margin: 50px 20px 50px;
+  }
+  &--title {
+    margin-bottom: 17px;
+    font-size: 32px;
+    font-weight: 900;
+    @include for-tablet {
+      font-size: 24px;
+    }
+    @include for-phone {
+      font-size: 18px;
+    }
+  }
+  &--description {
+    margin-bottom: 17px;
+    font-size: 20px;
+    font-weight: bold;
+    @include for-tablet {
+      font-size: 16px;
+    }
+    @include for-phone {
+      font-size: 14px;
+    }
+  }
+  &--button {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-yellow);
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    @include for-tablet {
+      font-size: 16px;
+    }
+    @include for-phone {
+      font-size: 14px;
+    }
+  }
+}
+
+.footer {
+  height: 127px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-black);
+  &__description {
+    margin-bottom: 19px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &--img {
+      width: 90px;
+      height: 80px;
+      background: url("../public/footer-img.svg") no-repeat;
+    }
+    span {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--color-yellow);
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .offers__card--long {
+    width: 900px;
+  }
+}
+
+@media (max-width: 900px) {
+  .offers__card--long {
+    width: 700px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header__menu {
+    width: 200px;
+  }
+}
